@@ -29,17 +29,31 @@
 
     <div id="root">
 
-        
+        <h2>Grocery List</h2>
+
+        <ul>
+            <li v-for="(item, i) in shoplist" :key="i">{{ item }}</li>
+        </ul>
+
+        <input type="text" v-model="newItem" placeholder="Add an item" @keyup.enter="addItem">
+        <button @click="addItem">Add</button>
 
     </div>
 
     <script>
-        //Vue instance
         let app = new Vue({
             el: '#root',
-
             data: {
-                
+                shoplist: ['Eggs', 'Milk', 'Bread'],
+                newItem: ''
+            },
+            methods: {
+                addItem() {
+                    const v = this.newItem.trim()
+                    if (!v) return
+                    this.shoplist.push(v)
+                    this.newItem = ''
+                }
             }
         })
     </script>
